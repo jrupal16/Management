@@ -1,0 +1,204 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="rupal.js"></script>
+    <link rel="stylesheet" href="todo.css">
+
+</head>
+<body>
+
+	<div class="container" ng-controller="modcntr">
+
+		<div class="page-header">
+			<h1>Midterm Team Manager <small>CS 454</small></h1>
+		</div>
+
+		<div class="row" >
+
+                                          <!-- ADD GROUP -->
+
+			<div class="col-md-4">
+				<h3>Add Group</h3>
+				<hr />
+                 <form ng-submit="add()">	
+
+				  <div class="form-group">
+				    <label for="newModuleName">Node Module</label>
+				    <input type="text" class="form-control" ng-model="nodemodule" id="newModuleName" placeholder="Enter the module name">
+				  </div>
+
+				  <div class="form-group">
+				    <label for="newModuleDescription">Description</label>
+				    <textarea class="form-control" ng-model="nodedescription" rows="4" id="newModuleDescription" placeholder="Enter a description of the node module"></textarea>
+				  </div>
+
+				  <div class="form-group text-center">
+				  	<button type="submit" class="btn btn-primary">Add Group</button>
+				  </div>
+
+				</form>
+			</div>
+
+                                  <!-- ADD STUDENT -->
+
+
+			<div class="col-md-4">
+				<h3>Add Student</h3>
+				<hr />
+				<form ng-submit="student()">
+				  <div class="form-group">
+				    <label for="newStudentName">Student Name</label>
+				    <input type="text" class="form-control" ng-model="studentname"id="newStudentName" placeholder="Enter the student's name">
+				  </div>
+
+				  <div class="form-group">
+				    <label for="targetGroup">Group</label>
+				    <select class="form-control" ng-model="grp">
+					  <option ng-repeat="optio in todos" value="{{optio.nodemodule}}" >{{optio.nodemodule}}</option>
+					  					  
+					</select>
+				  </div>
+				  
+				  <div class="form-group text-center">
+				  	<button type="submit" class="btn btn-primary">Add Student</button>
+				  </div>
+				</form>
+			</div>
+
+
+                               <!-- ADD TASK -->
+
+			<div class="col-md-4">
+				<h3>Add Task</h3>
+				<hr />
+				<form ng-submit="task()"S>
+				  <div class="form-group">
+				    <label for="newTaskText">Task</label> 
+				    <input type="text" class="form-control" ng-model="stuname" id="newTaskText" placeholder="Enter the task description">
+				  </div>
+				  <div class="form-group">
+				    <label for="targetGroup">Group</label>
+				    <select class="form-control" ng-model="tsk">
+					  <option ng-repeat="optio in todos" value="{{optio.nodemodule}}">{{optio.nodemodule}}</option>
+					  
+					</select>
+				  </div>
+
+				  
+				  <div class="form-group text-center">
+				  	<button type="submit" class="btn btn-primary">Add Task</button>
+				  </div>
+				</form>
+			</div>
+		</div>
+
+
+                          <!-- GROUP -->
+
+
+		<h2>Groups: {{todos.length}}</h2>
+		<hr />	
+
+        
+		<div class="row" ng-repeat="x in todos">
+			<div class="col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="panel-title" ng-model="select">
+                                 <span class="done-{{description}}">{{ x.nodemodule }}</span>
+
+          
+
+     <a href="" ng-click="removeGroup(todos.indexOf(x))"> <span class="pull-right glyphicon glyphicon-trash" ></span></a>
+
+                        </div>
+					</div>
+					<div class="panel-body">
+						<h3>Description</h3>
+						<p class="lead">{{ x.description }}</p>
+                                                           
+						
+						<div class="row">
+
+
+                               <!-- STUDENT -->
+
+							<div class="col-md-3" ng-model="deletestudent">
+
+								<h3>Members <small>{{x.student.length}}</small></h3>
+                                <hr />
+                                 <ul class="list-unstyled">
+									<li ng-repeat="y in x.student" >{{y}}</span> 
+
+   <a href="" ng-click="archive(todos.indexOf(x),x.student.indexOf(y))"><span class="glyphicon glyphicon-trash"></span></a>
+		
+ 					               </li>
+							    </ul>
+								
+							</div>
+
+
+
+
+								<!-- TASK -->
+
+							<div class="col-md-8" >
+							   <span>{{remaining(x.nodemodule)}} of {{x.task.length}} remaining</span>
+
+								<h3>Tasks <small>{{x.task.length}}</small></h3>
+                                <hr />
+
+
+
+
+                                <ul class="list-unstyled" >
+                                      
+                                <li ng-repeat = "z in x.task" >
+                                   <select name="" id="">
+                                            
+                                   <option value="" ng-repeat = "s in x.student">{{s}}</option>
+
+                                   </select> 
+                                        <input type="checkbox" ng-model="z.done">
+                                        <span class="done-{{z.done}}">{{z.tas}}</span>
+                                       <!-- Note: Consider binding a click event to the anchor tag below to
+                                                   remove this task -->
+              <a href="" ng-click="deletetask(todos.indexOf(x),x.task.indexOf(z))"><span class="glyphicon glyphicon-trash"></span></a>
+                                </li>
+                                    <!-- Note:  I have included the HTML for additional tasks, but 
+                                                your HTML should only include the HTML for 
+                                                a single task (your Angular template).  As you iterate
+                                                over all of your tasks, the template HTML will be duplicated
+                                                automatically. -->
+                                   
+                                   </ul>
+                                    
+                                    
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+        
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+
+	</div>
+
+
+</body>
+</html>
