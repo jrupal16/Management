@@ -7,8 +7,8 @@ This application should provide the following functionality:
 ## Create & Manage Groups:
 
  - A group is a collection of Students.
- - A group should have a Node Module associated with it.
- - A group should have a "Description" property that outlines the module that is being presented.
+ - A group have a Node Module associated with it.
+ - A group have a "Description" property that outlines the module that is being presented.
  - This application should allow Students to be added/removed from a group
  - app should allow groups to be deleted
  
